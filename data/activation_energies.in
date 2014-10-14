@@ -1,0 +1,145 @@
+!                                                         EA(K)
+JCH4       JCCH                   -> JC2H2      JCH3                                         2.50e+02   Mitchell 84          
+JH         JC2H6                  -> JC2H5      JH2                                          4.89E+03   TranFaradSco 65,2116  
+JH         JC2H2                  -> JC2H3                                                   1.21e+03   C=_C triple bond HASE  
+JH         JC2H4                  -> JC2H5                                                   7.50e+02   C=C  double bond HASE  
+JH         Jc-C3H2                -> JCH3CCH                                                 1.21e+03   C=_C triple bond       
+JH         Jl-C3H2                -> JCH3CCH                                                 1.21e+03   C=_C triple bond       
+JH         JC4H2                  -> JCH3C3                                                  1.21e+03   C=_C bond HASE         
+JH         JC4H2                  -> JC4H3                                                   1.21E+03   C=_C bond HASE          
+JH         JC5H2                  -> JC5H3                                                   1.21E+03   C=_C bond HASE          
+JH         JC6H2                  -> JC6H3                                                   1.21E+03   C=_C bond HASE          
+JH         JC7H2                  -> JC7H3                                                   1.21E+03   C=_C bond HASE          
+JH         JC8H2                  -> JC8H3                                                   1.21E+03   C=_C bond HASE         
+JH         JC9H2                  -> JC9H3                                                   1.21E+03   C=_C bond HASE         
+JH         JCH4                   -> JCH3       JH2                                          5.94e+03   JChPhy 50,5076 (1969)
+JH         JCO                    -> JHCO                                                    2.50e+03   WOON priv commun -DPR
+JH         JCS                    -> JHCS                                                    1.00e+03      EH                
+JH         JH2CO                  -> JCH2OH                                                  2.50E+03   WOON priv commun -DPR 
+JH         JHOOH                  -> JH2O       JOH                                          1.40e+03   TH                   
+JH         JHOOH                  -> JO2H       JH2                                          1.90e+03   M84                  
+JH         JH2S                   -> JH2        JHS                                          8.60e+02   TH 8.60E+02 1.35E+03 
+JH         JHC2O                  -> JH2CCO                                                  0.         AR                    
+JH         JHNO                   -> JNO        JH2                                          1.50e+03   M84,Origin=Igl&Silk  
+JH         JO2                    -> JO2H                                                    1.20e+03   TH                   
+JH         JO3                    -> JO2        JOH                                          4.50e+02   TH                   
+JH2        JC                     -> JCH2                                                    2.50e+03  92Summer. Exoth.      
+JH2        JC2                    -> JCCH       JH                                           4.20e+03  Our test              
+JH2        JCCH                   -> JC2H2      JH                                           4.20e+03                        
+JH2        JC3                    -> JC3H       JH                                           4.20e+03                        
+JH2        JC3H                   -> Jc-C3H2    JH                                           4.20e+03                        
+JH2        JC3H                   -> Jl-C3H2    JH                                           4.20e+03                        
+JH2        JC4                    -> JC4H       JH                                           4.20e+03                        
+JH2        JC4H                   -> JC4H2      JH                                           4.20e+03                        
+JH2        JC5                    -> JC5H       JH                                           4.20e+03                        
+JH2        JC5H                   -> JC5H2      JH                                           4.20e+03                        
+JH2        JC6                    -> JC6H       JH                                           4.20e+03                        
+JH2        JC6H                   -> JC6H2      JH                                           4.20e+03                        
+JH2        JC7                    -> JC7H       JH                                           4.20e+03                        
+JH2        JC7H                   -> JHC7H      JH                                           4.20e+03                        
+JH2        JC8                    -> JC8H       JH                                           4.20e+03                        
+JH2        JC8H                   -> JC8H2      JH                                           4.20e+03                        
+JH2        JC9                    -> JC9H       JH                                           4.20e+03                        
+JH2        JC9H                   -> JC9H2      JH                                           4.20e+03                        
+JH2        JCH2                   -> JCH3       JH                                           3.53e+03  NSRDS-NBS67 Westley 80
+JH2        JCH3                   -> JCH4       JH                                           6.44e+03  JChPhy 50,5076 (1969) 
+JH2        JCN                    -> JHCN       JH                                           2.07e+03  M84 and 1988 UMIST    
+JH2        JNH2                   -> JNH3       JH                                           6.30e+03  M84                   
+JH2        JOH                    -> JH2O       JH                                           2.10e+03  JPhyChRefDat,13,1259  
+JO         JCO                    -> JCO2                                                    1.00e+03   d'Hendecourt etal    
+JOH        JCO                    -> JCO2       JH                                           8.00e+01   Eric/Chun gas rates  
+JH         JCO                    -> JHOC                                                    1.00e+03      EH      eliminated
+
+!Activiation barrier below are not considered because doubtful (from previous verion of the code - 
+!should be checked)
+!
+!JH         JH2CO      JHCO       JH2                    1.85e+03   TH  BELOW ARE NOT USE
+!JCH        JCO2       JHCO       JCO                    3.00e+03   M84 Test only        
+!JCH        JH2CO      JHCO       JCH2                   2.00e+03   M84 Test only        
+!JH         JCO        JHCO                              1.00e+03   TH                   
+!JH         JCO        JHCO                              1.83e+03   DPR                  
+!JH         JH2CO      JCH2OH                            1.85E+03   Eric                NI
+!JH         JH2CO      JCH2OH                            6.50E+02   DPR                
+!JH         JHNO       JNO        JH2                    7.50e+02   Ea<1160K,JPCRD,2,267N
+!JH         JO2H       JO2        JH2                    3.50e+02   M84Try this as well N
+!JH         JN2        JN2H                              1.20e+03   EH To be eliminated N
+!JH2        JC2        JCCH       JH                     2.10e+03  Our estimate          
+!JH2        JC3        JC3H       JH                     2.10e+03                        
+!JH2        JC4        JC4H       JH                     2.10e+03                        
+!JH2        JC5        JC5H       JH                     2.10e+03                        
+!JH2        JC6        JC6H       JH                     2.10e+03                        
+!JH2        JC7        JC7H       JH                     2.10e+03                        
+!JH2        JC8        JC8H       JH                     2.10e+03                        
+!JH2        JC9        JC9H       JH                     2.10e+03                        
+!JH2        JCCH       JC2H2      JH                     2.10e+03                        
+!JH2        JC3H       JC3H2      JH                     2.10e+03                        
+!JH2        JC4H       JC4H2      JH                     2.10e+03                        
+!JH2        JC5H       JC5H2      JH                     2.10e+03                        
+!JH2        JC6H       JC6H2      JH                     2.10e+03                        
+!JH2        JC7H       JHC7H      JH                     2.10e+03                        
+!JH2        JC8H       JC8H2      JH                     2.10e+03                        
+!JH2        JC9H       JC9H2      JH                     2.10e+03                        
+!JH2        JOH        JH2O       JH                     2.60e+03   TH                   
+!JN         JCH2       JHCN       JH                     2.50e+02   M84                  
+!JN         JCH3       JHCN       JH         JH          2.50e+02   M84                  
+!JOH        JCO        JCO2       JH                     3.00e+02   JChPhy 44, 2877 (1966
+!JO         JCO        JCO2                              1.00e+01   DPR guess            
+!JO         JCO        JCO2                              2.00e+01   dpr                  
+!JO         JCO        JCO2                              3.00e+01   dpr                  
+!JO         JCO        JCO2                              4.00e+01   dpr                  
+!JO         JCO        JCO2                              5.00e+01   dpr                  
+!JO         JCO        JCO2                              6.00e+01   dpr                  
+!JO         JCO        JCO2                              7.00e+01   dpr                  
+!JO         JCO        JCO2                              8.00e+01   dpr                  
+!JO         JCO        JCO2                              9.00e+01   dpr                  
+!JO         JCO        JCO2                              1.00e+02   dpr                  
+!JO         JCO        JCO2                              2.00e+02   dpr                  
+!JO         JCO        JCO2                              3.00e+02   dpr                  
+!JO         JCO        JCO2                              4.00e+02   dpr                  
+!JO         JCO        JCO2                              5.00e+02   dpr                  
+!JO         JCO        JCO2                              6.00e+02   dpr                  
+!JO         JCO        JCO2                              7.00e+02   dpr                  
+!JO         JCO        JCO2                              8.00e+02   dpr                  
+!JO         JCO        JCO2                              9.00e+02   dpr                  
+!JO         JCO        JCO2                              1.25e+02   dpr                  
+!JH         JCO        JHCO                              5.00e+03   dpr                  
+!JH         JCO        JHCO                              3.50e+03   dpr                  
+!JO         JCO        JCO2                              1.50e+02   dpr                  
+!JH         JCO        JHCO                              3.00e+03   dpr                  
+!JO         JCO        JCO2                              1.35e+02   dpr                  
+!JO         JCO        JCO2                              1.40e+02   dpr                  
+!JH         JCO        JHCO                              2.80e+03   dpr                  
+!JH         JCO        JHCO                              3.20e+03   dpr                  
+!JH         JH2CO      JCH2OH                            5.00E+03   dpr              
+!JH         JH2CO      JCH2OH                            3.50E+03   dpr                
+!JH         JH2CO      JCH2OH                            3.00E+03   dpr               
+!JH         JH2CO      JCH2OH                            2.80E+03   dpr             
+!JH         JH2CO      JCH2OH                            3.20E+03   dpr        
+!
+!--------------------------------------------------------------
+! EH = Eric's Notes. Some rounded. Others from polarizability. 
+!      The others "estimate".
+! AR = Allen Robinson 
+!      Allen, M.,and Robinson, G.W. 1977, Ap.J.,212,396.
+!      Mostly based on Avgul Diselev 1970, Chem.Phys.Carbon,6,p1.
+!      These are actually carbonatious and graphite surfaces.
+!      Converted by 1kcal/mole = 503.4K, Numbers checked twice by Hasegawa.
+!      They say these ED may be reduced to 1/5 on a H2-ice surface.
+! TA = Tielens Allamandola
+! WT = Watson = mostly from Hollenbach Salpeter
+!      Watson, W.D. 1976, Rev.Mod.Phys., 48, 513.
+! TH = Tielens and Hagen. 
+!      Tielents, A.G.G.M., and Hagen, W. 1982, A&Ap.,114, 245.
+! SA = Sandford and Allamandola, 1990, Ap.J.355, 357.
+!      Lab. More realistic and up-to-dated.
+!      Also, Sandford and Allamandola, 1988,Icarus, 76, 201.
+! SA93=Sandford & Allamandola, 1993, ApJ, 417, 815. Lab, Table 2.
+! Le = Leger, 1983, A&Ap,123, 271.
+! M84= Mitchell 1984, ApJ. S., 54, 81.  or  1984 ApJ., 287, 665.
+! AK70 Avgul, N.N., and Kiselev, A.V. 1970, Chemistry and Physics of Carbon,
+!      (journal) vol. 6, p1. (editor P.L.Walker).  This article was used 
+!      by AR to calculate adsorption energies.
+!-------------------------------------------------------------
+
+
+

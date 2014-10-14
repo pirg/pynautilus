@@ -1,0 +1,82 @@
+!# ------------------------------------------------
+!# Parameter file for various properties of the disk.
+!# ------------------------------------------------
+!# blanck line or with spaces will be skipped.
+!# In fact, the only lines that matter are non commented lines with a
+!# '=' character to distinguish the identificator and the value(s)
+!# (each value must be separated with at least one space.
+!# Line must not be longer than 80 character, but comments can be far
+!# bigger than that, even on line with a parameter to read.
+
+!*****************************
+!*          Switches         *
+!*****************************
+
+preliminary_test = 0 ! Will or will not do comprehensive tests before the simulation. Switch it off when lauching thousands or simulations
+is_structure_evolution = 0 ! If 1, physical structure properties evolve with time, values come from structure_evolution.dat file that must exists
+grain_temperature_type = computed ! fixed, gas, table or computed
+! fixed: Tgrain = initial_dust_temperature. ;
+! gas: Tgrain = Tgas ; 
+! table: Tgrain is interpolated from structure_evolution.dat data file (5th optional column) ; 
+! computed: calculated from uv_flux and visual extinction by radiative equilibrium
+is_grain_reactions = 1 ! Accretion, grain surface reactions
+is_absorption = 1 ! H2 AND CO SELF-SHIELDING
+grain_tunneling_diffusion = 0 ! 0=thermal; For H,H2: 1=QM1; 2=QM2; 3=choose fastest
+modify_rate_flag = 1 ! 1=modify H; 2=modify H,H2, 3=modify all, -1=H+H only
+conservation_type = 0 ! 0=only e- conserved; 1=elem #1 conserved, 2=elem #1 & #2, etc
+
+!*****************************
+!*      1D and diffusion     *
+!*****************************
+!(diffusion is for species, not the structure)
+
+structure_type = 0D ! 0D, 1D_diff, 1D_no_diff
+spatial_resolution = 1 ! If 1, we are in 0D, else, we are in 1D, with diffusion between gas boxes. Number of lines in 1D.
+
+!*****************************
+!*    Gas phase parameters   *
+!*****************************
+
+initial_gas_density =  2.000E+04 ! initial gas density [part/cm-3]
+initial_gas_temperature =  1.000E+01 ! initial gas temperature [K]
+initial_visual_extinction =  1.500E+01 ! initial visual extinction
+cr_ionisation_rate =  1.300E-17 ! cosmic ray ionisation rate [s-1] (standard=1.3e-17)
+x_ionisation_rate =  0.000E+00 ! Ionisation rate due to X-rays [s-1]
+uv_flux =  1.000E+00 ! Scale factor for the UV flux, in unit of the reference flux (1.=nominal)
+
+!*****************************
+!*      Grain parameters     *
+!*****************************
+
+initial_dust_temperature =  1.000E+01 ! initial dust temperature [K] when grain_temperature_type=fixed
+initial_dtg_mass_ratio =  1.000E-02 ! dust-to-gas ratio by mass
+sticking_coeff_neutral =  1.000E+00 ! sticking coeff for neutral species
+sticking_coeff_positive =  0.000E+00 ! sticking coeff for positive species
+sticking_coeff_negative =  0.000E+00 ! sticking coeff for negative species
+grain_density =  3.000E+00 ! mass density of grain material
+grain_radius =  1.000E-05 ! grain radius [cm]
+diffusion_barrier_thickness =  1.000E-08 ! Barrier thickness [cm]
+surface_site_density =  1.500E+15 ! site density [cm-2]
+diff_binding_ratio =  5.000E-01 ! Ratio used to compute the DIFFUSION_BARRIER from the BINDING_ENERGY if not known
+chemical_barrier_thickness =  1.000E-08 ! grain reaction activation energy barrier width. [cm]
+cr_peak_grain_temp =  7.000E+01 ! peak grain temperature [K] (CR heating)
+cr_peak_duration =  1.000E-05 ! duration [s] of peak grain temperature
+Fe_ionisation_rate =  3.000E-14 ! (cosmic) Fe-ion--grain encounter [s-1 grain-1] 
+!! (for 0.1 micron grain) For cosmic photo desorptions, only Fe-ions are efficient to heat grains. 
+vib_to_dissip_freq_ratio =  1.000E-02 ! [no unit] The ratio of the surface-molecule bond frequency to the frequency at
+!! which energy is lost to the grain surface. Used for the RRK (Rice Ramsperger-Kessel) desorption mechanism
+!! (see Garrod el al. 2007 for more). Assumed to be 1% by default.
+
+!*****************************
+!*  Integration and Outputs  *
+!*****************************
+
+start_time =  1.000E+01 ! [yrs] first output time
+stop_time =  1.000E+02 ! [yrs] last output time
+nb_outputs = 1 ! Total number of outputs (used for linear or log spaced outputs)
+output_type = linear ! linear, log, table
+! linear: Output times are linearly spaced
+! log   : Outputs times are log-spaced
+! table : Outputs times are read from time_evolution.dat
+relative_tolerance =  1.000E-04 ! Relative tolerance of the solver
+minimum_initial_abundance =  1.000E-40 ! default minimum initial fraction abundance
