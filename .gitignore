@@ -3,3 +3,8 @@ ha/*
 tmp*
 *.pyc
 chains/*
+._*
+data/*
+test/*
+simuldata/*
+obs/*
