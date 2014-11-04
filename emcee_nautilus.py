@@ -1,3 +1,6 @@
+import matplotlib
+matplotlib.use('Agg')
+
 import emcee
 import pylab as pl
 import numpy as np
@@ -33,7 +36,7 @@ def lnlike(p,obs):
   density = pow(10,p[1])
   temperature = p[2]
   Av = pow(10,p[3])
-  print time, density, temperature, Av
+  # print time, density, temperature, Av
   if (limits[:,0]<=p).all() and (limits[:,1]>=p).all():
     model = N.run_nautilus(time, density, temperature, Av)
     diff = np.array([obs[key][0]-N.model[key][0] for key in obs.keys()])
@@ -61,22 +64,22 @@ f = open('simuldata/obs.pkl','rb')
 obs = pickle.load(f)
 f.close
 
-N = pynautilus.nautilus(temproot="./",debug=False)
+N = pynautilus.nautilus(temproot="./",debug=False,nautilus_exec_path="/home/gratier/code/nautilus")
 nobs = len(obs)
 labels = np.array(["time", "density", "temperature", "Av"])
-pinit = [5,5,15,1.2]
-limits = np.array([[1.,8],
-                   [1.,7.],
-                   [5.,30.],
-                   [-1,2]])
+pinit = [5.,5.,15.,np.log10(15)]
+limits = np.array([[1.,8.],
+                   [1.,10.],
+                   [5.,100.],
+                   [-2,2]])
                        
-ntemps = 3
+ntemps = 5
 ndim = 4
-nwalkers = 16
-nburn = 0
-niter = 0
-nthreads = 4
-nthin = 10
+nwalkers = 200
+nburn = 1
+niter = 1
+nthreads = 16
+nthin = min(nburn,10)
 prefix = ""
 
 restart_from_previous_run = True
@@ -91,30 +94,31 @@ PTsampler = emcee.PTSampler(ntemps, nwalkers, ndim, logl=lnlike, logp=lnprior, l
 pos = np.zeros((nwalkers,ndim))
 lnprobval = np.zeros((nwalkers))
 
-nstep = 10
-steps = np.linspace(1,7,nstep)
-# steps = np.linspace(0,40,nstep)
-
-chi2 = []
-
-pbar = ProgressBar(widgets=[Counter(), "/"+str(nstep)+" " , Percentage(), Bar(), Timer(), " ", ETA()], maxval=nstep).start()
-cnt = 0
-for step in steps:
-  # N.run_nautilus(time=pow(10,step))
-  # diff = np.array([obs[key][0]-N.model[key][0] for key in obs.keys()])
-  # sigma = np.array([np.sqrt(obs[key][1]) for key in obs.keys()])
-  # chi2.append(np.sum((diff/sigma)**2))
-  
-  chi2.append(-lnlike([step,5.,15.,np.log10(15)],obs))
-  cnt += 1
-  pbar.update(cnt)
-
-
-pl.figure(1)
-pl.clf()
-pl.plot(steps, chi2)
-pl.xscale('linear')
-pl.yscale('log')
+# nstep = 20
+# steps = np.linspace(1,10,nstep)
+# # steps = np.linspace(0,40,nstep)
+#
+# chi2 = []
+#
+# pbar = ProgressBar(widgets=[Counter(), "/"+str(nstep)+" " , Percentage(), Bar(), Timer(), " ", ETA()], maxval=nstep).start()
+# cnt = 0
+# for step in steps:
+#   # N.run_nautilus(time=pow(10,step))
+#   # diff = np.array([obs[key][0]-N.model[key][0] for key in obs.keys()])
+#   # sigma = np.array([np.sqrt(obs[key][1]) for key in obs.keys()])
+#   # chi2.append(np.sum((diff/sigma)**2))
+#
+#   chi2.append(-lnlike([step,5.,15.,np.log10(15)],obs))
+#   cnt += 1
+#   pbar.update(cnt)
+#
+#
+# pl.figure(1)
+# pl.clf()
+# pl.plot(steps, chi2)
+# pl.xscale('linear')
+# pl.yscale('linear')
+# pl.ylim([0,3])
 
 
 
@@ -163,7 +167,7 @@ if nburn!=0:
   pl.draw()
   pl.savefig("ha/"+prefix+"_lnprob.jpg")
     
-  Z = np.zeros((nthin,ntemps,np.min([30,ndim])))
+  Z = np.zeros((nthin,3,np.min([30,ndim])))
   cnt = 0
   for k in range(np.min([30,ndim])):
     for i in range(nthin):
@@ -172,7 +176,7 @@ if nburn!=0:
   pl.figure(3)
   pl.clf()    
   for i in range(np.min([30,ndim])):
-    pl.subplot(6,5,i+1)
+    pl.subplot(2,2,i+1)
     pl.plot(Z[:,0,i],'r-')
     pl.plot(Z[:,1,i],'b-')
     pl.plot(Z[:,2,i],'r-')
@@ -191,7 +195,7 @@ if nburn!=0:
   
 if niter!=0:
   pos1 = pos[0]
-  sampler = emcee.EnsembleSampler(nwalkers, ndim, lnprob, args=[obs],threads = 20)
+  sampler = emcee.EnsembleSampler(nwalkers, ndim, lnprob, args=[obs],threads = nthreads)
   cnt = 0
   pbar = ProgressBar(widgets=[Counter(), "/"+str(niter)+" " , Percentage(), Bar(), Timer(), " ", ETA()], maxval=niter).start()
   for result in sampler.sample(pos1, iterations=niter, storechain=True):
@@ -200,9 +204,8 @@ if niter!=0:
 
   print("Mean acceptance fraction:", np.mean(sampler.acceptance_fraction))
   
-  flat = sampler.chain[:,-1,:].reshape(-1,ndim)
-  flat[:,7:] = (np.sign(flat[:,7:])+1)/2
-  triangle.corner(flat[:,0:12], extents=limits[0:12], labels=labels[0:12])
+  flat = sampler.chain[:,:,:].reshape(-1,ndim)
+  triangle.corner(flat[:,0:12], extents=limits[0:12], labels=labels[0:12],bins=20,truths=pinit)
   pl.savefig("ha/"+prefix+"_corner.jpg")
   pl.close()
   
