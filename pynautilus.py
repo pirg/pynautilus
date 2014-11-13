@@ -96,11 +96,11 @@ class nautilus(object):
     
 if __name__ == "__main__":
   N = nautilus(temproot="./",debug=True,nautilus_exec_path="/home/gratier/code/nautilus")
-  N.run_nautilus(C_ab = 1e-8)
+  N.run_nautilus()
   print N.model['CO']
-  # f = open('simuldata/obs.pkl','wb')
-  # pickle.dump(N.model,f)
-  # f.close
+  f = open('simuldata/obs.pkl','wb')
+  pickle.dump(N.model,f)
+  f.close
   #
   # f = open('simuldata/obs.pkl','rb')
   # obs = pickle.load(f)
