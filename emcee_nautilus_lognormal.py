@@ -94,7 +94,7 @@ observed_species = ['C4H','HC3N','H2CO','NH3','l-C3H','CCS','CS','H2CCN','HC5N',
                      'l-C3H2', 'HNCO', 'HCS+', 'C6H', 'C3O', 'HC3NH+', 'CH3C3N', 'CCO', 'HNCCC']
 
 
-# f = open('tmc1_obs_bayes.txt','r')
+# f = open('obs/tmc1_obs_bayes.txt','r')
 # lines = f.readlines()
 # f.close()
 # obs = {}
@@ -105,7 +105,7 @@ observed_species = ['C4H','HC3N','H2CO','NH3','l-C3H','CCS','CS','H2CCN','HC5N',
 #   observed_species.append(specname)
   
 
-f = open('tmc1_obs_ohishi.txt','r')
+f = open('obs/tmc1_obs_ohishi.txt','r')
 lines = f.readlines()
 f.close()
 obs_ohishi = {}
@@ -113,13 +113,13 @@ for line in lines:
   specname, column_density= line.split()
   obs_ohishi[specname] = (float(column_density)-22.3, 0.3)
 
-obs = obs_ohishi
+obs = obs
 
 
 N = pynautilus.nautilus(temproot="./",debug=False,nautilus_exec_path="/home/gratier/code/nautilus")
 nobs = len(obs)
 labels = np.array(["$\log t (yr)$", "$\log n_H (cm^{-3}$)", "$T (K)$", "$\log Av (mag)$", "$\log \zeta (s^{-1})$","$\log C/H $","$\log N/H $","$\log O/H $","$\log S/H $"])
-pinit = [5.,5.,15.,np.log10(15)]
+pinit = [5.,5.,15.,np.log10(15),np.log10(1.3e-17), np.log10(1.7e-4),np.log10(6.2e-5), np.log10(1.4e-4), np.log10(8e-8)]
 limits = np.array([[1.,8.],
                    [1.,10.],
                    [5.,100.],
@@ -130,16 +130,16 @@ limits = np.array([[1.,8.],
                    [-10,-2],
                    [-10,-2]])
                        
-ntemps = 3
+ntemps = 5
 ndim = 9
-nwalkers = 20
-nburn = 2000
-niter = 50
+nwalkers = 100
+nburn = 1#50*12
+niter = 10
 nthreads = 24
 nthin = min(nburn,10)
-prefix = "lognorm"
+prefix = "lognorm_simuldata_kaifu_species"
+restart_from_previous_run = True
 
-restart_from_previous_run = True 
 if restart_from_previous_run:
   f = open("chains/"+prefix+"_chain.dat", "rb")
   p0 = pickle.load(f)
@@ -234,7 +234,7 @@ if niter!=0:
   percentiles = np.array([2.27501319,  15.86552539,  50.        ,  84.13447461,  97.72498681])
   
   flat = sampler.chain[:,:,:].reshape(-1,ndim)
-  triangle.corner(flat[:,0:12], extents=None, labels=labels[0:12],bins=15,truths=None,show_titles=True,quantiles=percentiles[1:-1]/100.)
+  triangle.corner(flat[:,0:12], extents=limits[0:12], labels=labels[0:12],bins=15,truths=pinit,show_titles=True,quantiles=percentiles[1:-1]/100.)
   pl.savefig("ha/"+prefix+"_corner.jpg")
   pl.close()
   
